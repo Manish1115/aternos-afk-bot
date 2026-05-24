@@ -1,40 +1,43 @@
 const mineflayer = require('mineflayer')
 
-function createBot() {
+function startBot() {
 
 const bot = mineflayer.createBot({
-  host: 'EmberValley.aternos.me',
-  port: 39107,
-  username: 'EmberBot',
-  version: '1.21.1'
+    host: 'YOURSERVER.aternos.me',
+    port: 25565,
+    username: 'BotAFK999',
+    auth: 'offline',
+    version: '1.21.1'
 })
 
 bot.on('spawn', () => {
-  console.log('Bot joined server')
+    console.log('Bot joined server')
 
-  let moving = false
+    setInterval(() => {
 
-  setInterval(() => {
+        bot.setControlState('forward', true)
 
-    if (moving) {
-      bot.setControlState('forward', false)
-      bot.setControlState('jump', false)
-      moving = false
-    } else {
-      bot.setControlState('forward', true)
-      bot.setControlState('jump', true)
-      moving = true
-    }
+        setTimeout(() => {
+            bot.setControlState('forward', false)
+        }, 2000)
 
-  }, 10000)
+    }, 15000)
 })
 
 bot.on('end', () => {
-  console.log('Reconnecting...')
-  setTimeout(createBot, 5000)
+    console.log('Bot disconnected. Reconnecting in 10 seconds...')
+
+    setTimeout(() => {
+        startBot()
+    }, 10000)
 })
 
-bot.on('error', err => console.log(err))
+bot.on('kicked', console.log)
+
+bot.on('error', err => {
+    console.log(err)
+})
+
 }
 
-createBot()
+startBot()
