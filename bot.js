@@ -40,7 +40,9 @@ bot.on('end', () => {
     }, 10000)
 })
 
-bot.on('kicked', console.log)
+bot.on('kicked', (reason) => {
+    console.log('KICKED:', reason)
+})
 
 bot.on('error', err => {
     console.log(err)
