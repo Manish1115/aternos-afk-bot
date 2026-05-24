@@ -12,14 +12,21 @@ const bot = mineflayer.createBot({
 bot.on('spawn', () => {
   console.log('Bot joined server')
 
+  let moving = false
+
   setInterval(() => {
-    bot.setControlState('jump', true)
 
-    setTimeout(() => {
+    if (moving) {
+      bot.setControlState('forward', false)
       bot.setControlState('jump', false)
-    }, 500)
+      moving = false
+    } else {
+      bot.setControlState('forward', true)
+      bot.setControlState('jump', true)
+      moving = true
+    }
 
-  }, 30000)
+  }, 10000)
 })
 
 bot.on('end', () => {
