@@ -37,7 +37,7 @@ function startBot() {
         setTimeout(() => {
             reconnecting = false
             startBot()
-        }, 15000)
+        }, 1000)
     })
 
     bot.on('kicked', (reason) => {
