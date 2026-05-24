@@ -5,7 +5,7 @@ function createBot() {
 const bot = mineflayer.createBot({
   host: 'EmberValley.aternos.me',
   port: 39107,
-  username: 'EmberBot'
+  username: 'EmberBot',
   version: '1.21.1'
 })
 
